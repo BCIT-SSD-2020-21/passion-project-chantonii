@@ -1,9 +1,11 @@
-# Passion Project
-
-## Pacman Clone
+# Pacman Clone
 this is a clone of the popular game pacman, at the end of the game the player will be asked to enter a 3 letter initial for the leaderboard, if they reach the top 10 highscore, it will be displayed onto leaderboard (which will be stored in a database), the user will have the option to sign up/sign in for a personalized name (their username) as well as a personal scoreboard.
 
-### installation instructions:
+## Technologies used:
+- React + Firebase
+
+## installation instructions:
+- npm install / yarn
 
 ### Milestone 1
 - set up gameboard layout
@@ -40,6 +42,8 @@ this is a clone of the popular game pacman, at the end of the game the player wi
 - smart moving ghosts
     - increased intelligence as level progess
     - with that, ghost no longer need to move faster
+- user can save progess
+    - players can start at the last played level
 
 
 
