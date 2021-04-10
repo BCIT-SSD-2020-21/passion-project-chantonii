@@ -1,10 +1,15 @@
 import React, {useState, useEffect} from 'react'
-import Pacman from '../Pacman'
+import Character from '../Character'
 
 export default function Gameboard(props){
     const [isPlaying, setIsPlaying] = useState(false)
     const boardWidth = 600;
     const boardHeight = 600;
+
+    const pacman = new Character("yellow",25,25);
+    const pinky = new Character("pink",75,75)
+
+    const characters = [pacman, pinky]
 
     const gameOn = () => {
         setIsPlaying(true)
@@ -23,9 +28,11 @@ export default function Gameboard(props){
             {isPlaying ?
                 <p>Enjoy the game!</p> : <p>Press start to begin</p>
             }
-            <svg width={boardWidth} height={boardHeight}>
-                <rect x={0} y={50} width={boardWidth} height={boardHeight} fill="#FFFFF" />
-            </svg>
+            <div id="gameBoard" style={{width: boardWidth, height: boardHeight, borderWidth: boardWidth/2, background:"black", display: "block", marginLeft: "auto", marginRight: "auto"}}>
+                <div key={pacman} style={{width: pacman.width, height: pacman.height, left: pacman.xpos,top: pacman.ypos, background: pacman.color}}></div>
+                <div key={pinky} style={{width: pinky.width, height: pinky.height, left: pinky.xpos,top: pinky.ypos, background: pinky.color}}></div>
+            </div>
+            
         </div>
     );
 }
