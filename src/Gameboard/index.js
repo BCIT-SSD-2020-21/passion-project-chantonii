@@ -7,9 +7,12 @@ export default function Gameboard(props){
     const boardHeight = 600;
 
     const pacman = new Character("yellow",25,25);
-    const pinky = new Character("pink",75,75)
+    const pinky = new Character("pink",75,75);
+    const blinky = new Character("red", 350,250);
+    const inky = new Character("cyan", 200,125);
+    const clyde = new Character("orange", 450, 25);
 
-    const characters = [pacman, pinky]
+    const characters = [pacman, pinky,blinky,inky,clyde]
 
     const gameOn = () => {
         setIsPlaying(true)
@@ -28,9 +31,9 @@ export default function Gameboard(props){
             {isPlaying ?
                 <p>Enjoy the game!</p> : <p>Press start to begin</p>
             }
-            <div id="gameBoard" style={{width: boardWidth, height: boardHeight, borderWidth: boardWidth/2, background:"black", display: "block", marginLeft: "auto", marginRight: "auto"}}>
-                <div key={pacman} style={{width: pacman.width, height: pacman.height, left: pacman.xpos,top: pacman.ypos, background: pacman.color}}></div>
-                <div key={pinky} style={{width: pinky.width, height: pinky.height, left: pinky.xpos,top: pinky.ypos, background: pinky.color}}></div>
+            <div id="gameBoard" style={{width: boardWidth, height: boardHeight, borderWidth: boardWidth/2, background:"black", marginLeft: "auto", marginRight: "auto"}}>
+                <div key={pacman} style={{width: pacman.width, height: pacman.height, position: "relative", left: pacman.xpos,top: pacman.ypos, background: pacman.color}}></div>
+                <div key={pinky} style={{width: pinky.width, height: pinky.height, position: "relative", left: pinky.xpos,top: pinky.ypos, background: pinky.color}}></div>
             </div>
             
         </div>
