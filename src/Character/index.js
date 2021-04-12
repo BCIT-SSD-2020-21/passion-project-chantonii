@@ -1,7 +1,7 @@
-import React from 'react'
 
-export default function Character (charColor, x, y){
+export default function Character (charName,charColor, x, y){
     var character = {
+        name: charName,
         width: 25,
         height:25,
         color: charColor,

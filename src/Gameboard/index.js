@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import {useState} from 'react'
 import Character from '../Character'
 
 export default function Gameboard(props){
@@ -6,13 +6,13 @@ export default function Gameboard(props){
     const boardWidth = 600;
     const boardHeight = 600;
 
-    const pacman = new Character("yellow",25,25);
-    const pinky = new Character("pink",75,75);
-    const blinky = new Character("red", 350,250);
-    const inky = new Character("cyan", 200,125);
-    const clyde = new Character("orange", 450, 25);
+    const pacman = new Character("pacman","yellow",25,25);
+    const pinky = new Character("pinky","pink",75,75);
+    const blinky = new Character("blinky","red", 350,250);
+    const inky = new Character("inky","cyan", 200,125);
+    const clyde = new Character("clyde","orange", 450, 25);
 
-    const characters = [pacman, pinky,blinky,inky,clyde]
+    const characters = [pacman,pinky,blinky,inky,clyde]
 
     const gameOn = () => {
         setIsPlaying(true)
@@ -20,6 +20,11 @@ export default function Gameboard(props){
 
     const gameOver = () => {
         setIsPlaying(false)
+    }
+
+    const renderCharacter = (character) => {
+
+        return(<div key={character.name} style={{width: character.width, height: character.height, position: "relative", left: character.xpos, top: character.ypos, background: character.color}}></div>)
     }
     
     return(
@@ -32,8 +37,9 @@ export default function Gameboard(props){
                 <p>Enjoy the game!</p> : <p>Press start to begin</p>
             }
             <div id="gameBoard" style={{width: boardWidth, height: boardHeight, borderWidth: boardWidth/2, background:"black", marginLeft: "auto", marginRight: "auto"}}>
-                <div key={pacman} style={{width: pacman.width, height: pacman.height, position: "relative", left: pacman.xpos,top: pacman.ypos, background: pacman.color}}></div>
-                <div key={pinky} style={{width: pinky.width, height: pinky.height, position: "relative", left: pinky.xpos,top: pinky.ypos, background: pinky.color}}></div>
+                {characters.map((character) => (
+                    renderCharacter(character)
+                ))}
             </div>
             
         </div>
