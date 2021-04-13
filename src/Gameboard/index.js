@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import Character from '../Character'
 
 export default function Gameboard(props){
@@ -23,8 +23,14 @@ export default function Gameboard(props){
     }
 
     const renderCharacter = (character) => {
-
         return(<div key={character.name} style={{width: character.width, height: character.height, position: "relative", left: character.xpos, top: character.ypos, background: character.color}}></div>)
+    }
+
+    const updatePos = () => {
+        if(pacman.xpos === 575){
+            pacman.updatePos(-25,pacman.ypos)
+        }
+        pacman.updatePos(pacman.xpos + 25, pacman.ypos)
     }
     
     return(
@@ -41,7 +47,9 @@ export default function Gameboard(props){
                     renderCharacter(character)
                 ))}
             </div>
-            
+            <div>
+                <button onClick={updatePos}> move </button>
+            </div>
         </div>
     );
 }

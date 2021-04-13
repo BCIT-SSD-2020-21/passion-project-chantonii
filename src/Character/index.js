@@ -1,5 +1,5 @@
 
-export default function Character (charName,charColor, x, y){
+export default function Character (charName, charColor, x, y){
     var character = {
         name: charName,
         width: 25,
@@ -8,5 +8,12 @@ export default function Character (charName,charColor, x, y){
         xpos: x,
         ypos: y,
     }
+
+    const updatePos = (newX,newY) =>{
+        character.xpos = newX;
+        character.ypos = newY;
+    }
+
+
     return character;
 }
