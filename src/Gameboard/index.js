@@ -1,16 +1,15 @@
-import {useState, useEffect} from 'react'
-import Character from '../Character'
+import {useState} from 'react'
 
 export default function Gameboard(props){
     const [isPlaying, setIsPlaying] = useState(false)
+    const [pacman, setPacman] = useState({name: "pacman", width: 25, height: 25, color: "yellow", xpos: 25, ypos: 25})
+    const [pinky, setPinky] = useState({name: "pinky", width: 25, height: 25, color: "pink", xpos: 250, ypos: 300})
+    const [blinky, setBlinky] = useState({name: "blinky", width: 25, height: 25, color: "red",xpos: 300, ypos: 250})
+    const [inky, setInky] = useState({name: "inky", width: 25, height: 25, color: "cyan", xpos: 200, ypos: 125})
+    const [clyde, setClyde] = useState({name: "clyde", width: 25, height: 25, color: "orange", xpos: 400, ypos: 400})
+
     const boardWidth = 600;
     const boardHeight = 600;
-
-    const pacman = new Character("pacman","yellow",25,25);
-    const pinky = new Character("pinky","pink",75,75);
-    const blinky = new Character("blinky","red", 350,250);
-    const inky = new Character("inky","cyan", 200,125);
-    const clyde = new Character("clyde","orange", 450, 25);
 
     const characters = [pacman,pinky,blinky,inky,clyde]
 
@@ -28,9 +27,10 @@ export default function Gameboard(props){
 
     const updatePos = () => {
         if(pacman.xpos === 575){
-            pacman.updatePos(-25,pacman.ypos)
+            setPacman({...pacman,xpos: 0})
+        }else{
+            setPacman({...pacman, xpos: pacman.xpos + 25})
         }
-        pacman.updatePos(pacman.xpos + 25, pacman.ypos)
     }
     
     return(

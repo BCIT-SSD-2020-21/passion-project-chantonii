@@ -9,11 +9,5 @@ export default function Character (charName, charColor, x, y){
         ypos: y,
     }
 
-    const updatePos = (newX,newY) =>{
-        character.xpos = newX;
-        character.ypos = newY;
-    }
-
-
     return character;
 }
