@@ -15,26 +15,59 @@ export default function Gameboard(props){
 
     const gameOn = () => {
         setIsPlaying(true)
+        document.getElementById("gamepad").focus();
     }
 
     const gameOver = () => {
         setIsPlaying(false)
+        
     }
 
     const renderCharacter = (character) => {
         return(<div key={character.name} style={{width: character.width, height: character.height, position: "relative", left: character.xpos, top: character.ypos, background: character.color}}></div>)
     }
 
-    const updatePos = () => {
-        if(pacman.xpos === 575){
-            setPacman({...pacman,xpos: 0})
-        }else{
-            setPacman({...pacman, xpos: pacman.xpos + 25})
+    const handleKeyDown = (e) => {
+        var arrows =[37,38,39,40]
+
+        if(arrows.indexOf(e.keyCode) >= 0){
+            console.log(e.keyCode)
+            move(e.keyCode)
+        }
+    }
+
+    const move = (keypressed) => {
+        if(keypressed === 39){ //left
+            if(pacman.xpos === 575){
+                setPacman({...pacman,xpos: 0})
+            }else{
+                setPacman({...pacman, xpos: pacman.xpos + 25})
+            }
+        }else if(keypressed === 38){ //up
+            if(pacman.ypos === 0){
+                setPacman({...pacman,ypos: 575})
+            }else{
+                setPacman({...pacman, ypos: pacman.ypos - 25})
+            }
+        }else if(keypressed === 37){ //right
+            if(pacman.xpos === 0){
+                setPacman({...pacman,xpos: 575})
+            }else{
+                setPacman({...pacman, xpos: pacman.xpos - 25})
+            }
+        }else{ //down
+            if(pacman.ypos === 575){
+                setPacman({...pacman, ypos: 0})
+            }else{
+                setPacman({...pacman, ypos: pacman.ypos + 25})
+            }
         }
     }
     
     return(
+        
         <div>
+            
             <div>
                 <button onClick={gameOn}> start game </button>
                 <button onClick={gameOver}> end game</button>
@@ -42,14 +75,16 @@ export default function Gameboard(props){
             {isPlaying ?
                 <p>Enjoy the game!</p> : <p>Press start to begin</p>
             }
+            <input id="gamepad" onKeyDown={e => handleKeyDown(e)} style={{opacity: 0}}/>
             <div id="gameBoard" style={{width: boardWidth, height: boardHeight, borderWidth: boardWidth/2, background:"black", marginLeft: "auto", marginRight: "auto"}}>
+                
                 {characters.map((character) => (
                     renderCharacter(character)
                 ))}
             </div>
-            <div>
+            {/* <div>
                 <button onClick={updatePos}> move </button>
-            </div>
+            </div> */}
         </div>
     );
 }
