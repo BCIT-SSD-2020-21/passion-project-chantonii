@@ -2,11 +2,16 @@ import {useState,useEffect} from 'react'
 
 export default function Gameboard(props){
     const [isPlaying, setIsPlaying] = useState(false)
+
     const [pacman, setPacman] = useState({name: "pacman", width: 25, height: 25, color: "yellow", xpos: 25, ypos: 25})
     const [pinky, setPinky] = useState({name: "pinky", width: 25, height: 25, color: "pink", xpos: 250, ypos: 300})
     const [blinky, setBlinky] = useState({name: "blinky", width: 25, height: 25, color: "red",xpos: 300, ypos: 250})
     const [inky, setInky] = useState({name: "inky", width: 25, height: 25, color: "cyan", xpos: 200, ypos: 125})
     const [clyde, setClyde] = useState({name: "clyde", width: 25, height: 25, color: "orange", xpos: 400, ypos: 400})
+
+    const [point, setPoint] = useState(0)
+
+
     const boardWidth = 600;
     const boardHeight = 600;
 
@@ -19,6 +24,8 @@ export default function Gameboard(props){
 
     const gameOver = () => {
         setIsPlaying(false)
+
+        setPoint(0)
     }
 
     const renderCharacter = (character) => {
@@ -68,9 +75,10 @@ export default function Gameboard(props){
             clearInterval(moveId)
         }
         return () =>  clearInterval(moveId)
-    }, [isPlaying,pinky,blinky,inky,clyde])
+    }, [isPlaying,pinky,blinky,inky,clyde,point])
 
     const ghostMovement = () => {
+        setPoint(prev => prev + 10)
         var pinkyMove = Math.round(Math.random() * 3)
         if(pinkyMove === 0){ //left
             if(pinky.xpos === 575){
@@ -192,6 +200,7 @@ export default function Gameboard(props){
             {isPlaying ?
                 <p>Enjoy the game!</p> : <p>Press start to begin</p>
             }
+            <text style={{paddingLeft: 150}}>Points: {point}</text>
             <input id="gamepad" onKeyDown={e => handleKeyDown(e)} style={{opacity: 0}}/>
             <div id="gameBoard" style={{width: boardWidth, height: boardHeight, borderWidth: boardWidth/2, background:"black", marginLeft: "auto", marginRight: "auto"}}>
                 
