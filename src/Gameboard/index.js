@@ -64,44 +64,40 @@ export default function Gameboard(props){
     useEffect(() => {
         var moveId
         if(isPlaying){
-            moveId = setInterval(()=> {ghostMovement()},2500)
+            moveId = setInterval(()=> {ghostMovement()},1000)
         }else{
             clearInterval(moveId)
         }
         return () =>  clearInterval(moveId)
-    }, [isPlaying])
+    }, [isPlaying,pinky])
 
     const ghostMovement = () => {
-        if(pinky.xpos === 575){
-            setPinky({...pinky,xpos: 0})
-        }else{
-            setPinky({...pinky, xpos: pinky.xpos + 25})
+        var move = Math.round(Math.random() * 3)
+        if(move === 0){ //left
+            if(pinky.xpos === 575){
+                setPinky({...pinky,xpos: 0})
+            }else{
+                setPinky({...pinky, xpos: pinky.xpos + 25})
+            }
+        }else if (move === 1) { //up
+            if(pinky.ypos === 0){
+                setPinky({...pinky,ypos: 575})
+            }else{
+                setPinky({...pinky, ypos: pinky.ypos - 25})
+            }
+        }else if (move === 2) { //right
+            if(pinky.xpos === 0){
+                setPinky({...pinky,xpos: 575})
+            }else{
+                setPinky({...pinky, xpos: pinky.xpos - 25})
+            }
+        }else { //down
+            if(pinky.ypos === 575){
+                setPinky({...pinky,ypos: 0})
+            }else{
+                setPinky({...pinky, ypos: pinky.ypos + 25})
+            }
         }
-
-        // var move = Math.round(Math.random() * 3)
-        // console.log(move)
-        // if(move === 0){
-        //     setPinky({...pinky, xpos: pinky.xpos + 25})
-        // }else if (move === 1) {
-        //     setPinky({...pinky, ypos: pinky.ypos - 25})
-        // }else if (move === 2) {
-        //     setPinky({...pinky, xpos: pinky.xpos - 25})
-        // }else {
-        //     setPinky({...pinky, ypos: pinky.ypos + 25})
-        // }
-        
-        // var moveUp = Math.round(Math.random())
-        // if(moveLeft === 1){
-        //     setPinky({...pinky, xpos: pinky.xpos + 25})
-        // }else{
-        //     setPinky({...pinky, xpos: pinky.xpos - 25})
-        // }
-        // if(moveUp === 1){
-        //     setPinky({...pinky, ypos: pinky.ypos - 25})
-        // }else{
-        //     setPinky({...pinky, ypos: pinky.ypos + 25})
-        // }
-        
     }
     
     return(
