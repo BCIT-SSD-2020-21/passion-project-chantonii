@@ -1,4 +1,5 @@
 import {useState,useEffect} from 'react'
+import Leaderboard from '../Leaderboard'
 
 export default function Gameboard(props){
     const [isPlaying, setIsPlaying] = useState(false)
@@ -191,8 +192,6 @@ export default function Gameboard(props){
                 setClyde({...clyde, ypos: clyde.ypos + 25})
             }
         }
-
-        
     }
     
     return(
@@ -207,15 +206,17 @@ export default function Gameboard(props){
             }
             <text style={{paddingLeft: 150}}>Points: {point}</text>
             <input id="gamepad" onKeyDown={e => handleKeyDown(e)} style={{opacity: 0}}/>
-            <div id="gameBoard" style={{width: boardWidth, height: boardHeight, borderWidth: boardWidth/2, background:"black", marginLeft: "auto", marginRight: "auto"}}>
-                
-                {characters.map((character) => (
-                    renderCharacter(character)
-                ))}
-            </div>
-            {/* <div>
-                <button onClick={updatePos}> move </button>
-            </div> */}
+            {
+                isPlaying ?
+                <div id="gameBoard" style={{width: boardWidth, height: boardHeight, borderWidth: boardWidth/2, background:"black", marginLeft: "auto", marginRight: "auto"}}>
+                    {characters.map((character) => (
+                        renderCharacter(character)
+                    ))}
+                </div> :
+                <Leaderboard points={points}/>
+            }
+            
+            
         </div>
     );
 }
