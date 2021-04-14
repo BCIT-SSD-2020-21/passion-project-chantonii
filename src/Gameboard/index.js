@@ -1,4 +1,5 @@
 import {useState,useEffect} from 'react'
+import Leaderboard from '../Leaderboard'
 
 export default function Gameboard(props){
     const [isPlaying, setIsPlaying] = useState(false)
@@ -10,7 +11,7 @@ export default function Gameboard(props){
     const [clyde, setClyde] = useState({name: "clyde", width: 25, height: 25, color: "orange", xpos: 400, ypos: 400})
 
     const [point, setPoint] = useState(0)
-
+    const [points, setPoints] = useState([])
 
     const boardWidth = 600;
     const boardHeight = 600;
@@ -24,7 +25,12 @@ export default function Gameboard(props){
 
     const gameOver = () => {
         setIsPlaying(false)
-
+        let tempList = points
+        tempList.push(point)
+        tempList.sort(function(a, b){return b-a})
+        if(tempList.length > 10) tempList.length = 10;
+        setPoints(tempList)
+        console.log(points)
         setPoint(0)
     }
 
@@ -186,8 +192,6 @@ export default function Gameboard(props){
                 setClyde({...clyde, ypos: clyde.ypos + 25})
             }
         }
-
-        
     }
     
     return(
@@ -202,15 +206,17 @@ export default function Gameboard(props){
             }
             <text style={{paddingLeft: 150}}>Points: {point}</text>
             <input id="gamepad" onKeyDown={e => handleKeyDown(e)} style={{opacity: 0}}/>
-            <div id="gameBoard" style={{width: boardWidth, height: boardHeight, borderWidth: boardWidth/2, background:"black", marginLeft: "auto", marginRight: "auto"}}>
-                
-                {characters.map((character) => (
-                    renderCharacter(character)
-                ))}
-            </div>
-            {/* <div>
-                <button onClick={updatePos}> move </button>
-            </div> */}
+            {
+                isPlaying ?
+                <div id="gameBoard" style={{width: boardWidth, height: boardHeight, borderWidth: boardWidth/2, background:"black", marginLeft: "auto", marginRight: "auto"}}>
+                    {characters.map((character) => (
+                        renderCharacter(character)
+                    ))}
+                </div> :
+                <Leaderboard points={points}/>
+            }
+            
+            
         </div>
     );
 }
