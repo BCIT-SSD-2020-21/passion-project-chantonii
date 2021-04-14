@@ -10,7 +10,7 @@ export default function Gameboard(props){
     const [clyde, setClyde] = useState({name: "clyde", width: 25, height: 25, color: "orange", xpos: 400, ypos: 400})
 
     const [point, setPoint] = useState(0)
-
+    const [points, setPoints] = useState([])
 
     const boardWidth = 600;
     const boardHeight = 600;
@@ -24,7 +24,12 @@ export default function Gameboard(props){
 
     const gameOver = () => {
         setIsPlaying(false)
-
+        let tempList = points
+        tempList.push(point)
+        tempList.sort(function(a, b){return b-a})
+        if(tempList.length > 10) tempList.length = 10;
+        setPoints(tempList)
+        console.log(points)
         setPoint(0)
     }
 
