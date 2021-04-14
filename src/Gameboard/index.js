@@ -7,7 +7,6 @@ export default function Gameboard(props){
     const [blinky, setBlinky] = useState({name: "blinky", width: 25, height: 25, color: "red",xpos: 300, ypos: 250})
     const [inky, setInky] = useState({name: "inky", width: 25, height: 25, color: "cyan", xpos: 200, ypos: 125})
     const [clyde, setClyde] = useState({name: "clyde", width: 25, height: 25, color: "orange", xpos: 400, ypos: 400})
-
     const boardWidth = 600;
     const boardHeight = 600;
 
@@ -69,23 +68,23 @@ export default function Gameboard(props){
             clearInterval(moveId)
         }
         return () =>  clearInterval(moveId)
-    }, [isPlaying,pinky])
+    }, [isPlaying,pinky,blinky,inky,clyde])
 
     const ghostMovement = () => {
-        var move = Math.round(Math.random() * 3)
-        if(move === 0){ //left
+        var pinkyMove = Math.round(Math.random() * 3)
+        if(pinkyMove === 0){ //left
             if(pinky.xpos === 575){
                 setPinky({...pinky,xpos: 0})
             }else{
                 setPinky({...pinky, xpos: pinky.xpos + 25})
             }
-        }else if (move === 1) { //up
+        }else if (pinkyMove === 1) { //up
             if(pinky.ypos === 0){
                 setPinky({...pinky,ypos: 575})
             }else{
                 setPinky({...pinky, ypos: pinky.ypos - 25})
             }
-        }else if (move === 2) { //right
+        }else if (pinkyMove === 2) { //right
             if(pinky.xpos === 0){
                 setPinky({...pinky,xpos: 575})
             }else{
@@ -98,12 +97,94 @@ export default function Gameboard(props){
                 setPinky({...pinky, ypos: pinky.ypos + 25})
             }
         }
+
+        var blinkyMove = Math.round(Math.random() * 3)
+        if(blinkyMove === 0){ //left
+            if(blinky.xpos === 575){
+                setBlinky({...blinky,xpos: 0})
+            }else{
+                setBlinky({...blinky, xpos: blinky.xpos + 25})
+            }
+        }else if (blinkyMove === 1) { //up
+            if(blinky.ypos === 0){
+                setBlinky({...blinky,ypos: 575})
+            }else{
+                setBlinky({...blinky, ypos: blinky.ypos - 25})
+            }
+        }else if (blinkyMove === 2) { //right
+            if(blinky.xpos === 0){
+                setBlinky({...blinky,xpos: 575})
+            }else{
+                setBlinky({...blinky, xpos: blinky.xpos - 25})
+            }
+        }else { //down
+            if(blinky.ypos === 575){
+                setBlinky({...blinky,ypos: 0})
+            }else{
+                setBlinky({...blinky, ypos: blinky.ypos + 25})
+            }
+        }
+
+        var inkyMove = Math.round(Math.random() * 3)
+        if(inkyMove === 0){ //left
+            if(inky.xpos === 575){
+                setInky({...inky,xpos: 0})
+            }else{
+                setInky({...inky, xpos: inky.xpos + 25})
+            }
+        }else if (inkyMove === 1) { //up
+            if(inky.ypos === 0){
+                setInky({...inky,ypos: 575})
+            }else{
+                setInky({...inky, ypos: inky.ypos - 25})
+            }
+        }else if (inkyMove === 2) { //right
+            if(inky.xpos === 0){
+                setInky({...inky,xpos: 575})
+            }else{
+                setInky({...inky, xpos: inky.xpos - 25})
+            }
+        }else { //down
+            if(inky.ypos === 575){
+                setInky({...inky,ypos: 0})
+            }else{
+                setInky({...inky, ypos: inky.ypos + 25})
+            }
+        }
+
+        var clydeMove = Math.round(Math.random() * 3)
+        if(clydeMove === 0){ //left
+            if(clyde.xpos === 575){
+                setClyde({...clyde,xpos: 0})
+            }else{
+                setClyde({...clyde, xpos: clyde.xpos + 25})
+            }
+        }else if (clydeMove === 1) { //up
+            if(clyde.ypos === 0){
+                setClyde({...clyde,ypos: 575})
+            }else{
+                setClyde({...clyde, ypos: clyde.ypos - 25})
+            }
+        }else if (clydeMove === 2) { //right
+            if(clyde.xpos === 0){
+                setClyde({...clyde,xpos: 575})
+            }else{
+                setClyde({...clyde, xpos: clyde.xpos - 25})
+            }
+        }else { //down
+            if(clyde.ypos === 575){
+                setClyde({...clyde,ypos: 0})
+            }else{
+                setClyde({...clyde, ypos: clyde.ypos + 25})
+            }
+        }
+
+        
     }
     
     return(
         
         <div>
-            
             <div>
                 <button onClick={gameOn}> start game </button>
                 <button onClick={gameOver}> end game</button>
