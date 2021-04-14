@@ -72,23 +72,23 @@ export default function Gameboard(props){
     }, [isPlaying])
 
     const ghostMovement = () => {
-        // if(pinky.xpos === 575){
-        //     setPinky({...pinky,xpos: 0})
-        // }else{
-        //     setPinky({...pinky, xpos: pinky.xpos + 25})
-        // }
-
-        var move = Math.round(Math.random() * 3)
-        console.log(move)
-        if(move === 0){
+        if(pinky.xpos === 575){
+            setPinky({...pinky,xpos: 0})
+        }else{
             setPinky({...pinky, xpos: pinky.xpos + 25})
-        }else if (move === 1) {
-            setPinky({...pinky, ypos: pinky.ypos - 25})
-        }else if (move === 2) {
-            setPinky({...pinky, xpos: pinky.xpos - 25})
-        }else {
-            setPinky({...pinky, ypos: pinky.ypos + 25})
         }
+
+        // var move = Math.round(Math.random() * 3)
+        // console.log(move)
+        // if(move === 0){
+        //     setPinky({...pinky, xpos: pinky.xpos + 25})
+        // }else if (move === 1) {
+        //     setPinky({...pinky, ypos: pinky.ypos - 25})
+        // }else if (move === 2) {
+        //     setPinky({...pinky, xpos: pinky.xpos - 25})
+        // }else {
+        //     setPinky({...pinky, ypos: pinky.ypos + 25})
+        // }
         
         // var moveUp = Math.round(Math.random())
         // if(moveLeft === 1){
