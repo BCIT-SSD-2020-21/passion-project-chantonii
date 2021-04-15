@@ -34,13 +34,16 @@ export default function Gameboard(props){
     }
 
     const getLeaderboard = async () => {
-        // const tempList = await db
-        //     .collection('leaderboard')
-        //     .get()
-        // console.log(tempList)
-        //tempList.sort(compare)
-        //if(tempList.length > 10) tempList.length = 10;
-        //setPoints(tempList)
+        const boardinfo = await db
+            .collection('leaderboard')
+            .get()
+        var tempList =[]
+        boardinfo.docs.map(doc => 
+            tempList.push(doc.data())
+        )
+        tempList.sort(compare)
+        if(tempList.length > 10) tempList.length = 10;
+        setPoints(tempList)
     }
 
     useEffect(()=>{
@@ -65,6 +68,7 @@ export default function Gameboard(props){
     const gameOver = () => {
         setIsPlaying(false)
         updateLeaderboard()
+        getLeaderboard()
         setPoint(0)
     }
 
