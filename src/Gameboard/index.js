@@ -1,7 +1,12 @@
 import {useState,useEffect} from 'react'
 import Leaderboard from '../Leaderboard'
+import firebase from '../firebase/config.js'
+import 'firebase/firestore'
 
 export default function Gameboard(props){
+
+    const db = firebase.firestore()
+
     const [isPlaying, setIsPlaying] = useState(false)
 
     const [pacman, setPacman] = useState({name: "pacman", width: 25, height: 25, color: "yellow", xpos: 25, ypos: 25})
@@ -18,19 +23,48 @@ export default function Gameboard(props){
 
     const characters = [pacman,pinky,blinky,inky,clyde]
 
+    const compare = (a,b) => {
+        if(a.score < b.score){
+            return 1;
+        }
+        if(a.score > b.score){
+            return -1
+        }
+        return 0
+    }
+
+    const getLeaderboard = async () => {
+        // const tempList = await db
+        //     .collection('leaderboard')
+        //     .get()
+        // console.log(tempList)
+        //tempList.sort(compare)
+        //if(tempList.length > 10) tempList.length = 10;
+        //setPoints(tempList)
+    }
+
+    useEffect(()=>{
+        getLeaderboard()
+    },[])
+
     const gameOn = () => {
         setIsPlaying(true)
         document.getElementById("gamepad").focus();
     }
+    
+    const name = "ANT"
+    const updateLeaderboard = async () => {
+        await db
+            .collection('leaderboard')
+            .add({
+                name: name,
+                score: point
+            })
+    }
 
     const gameOver = () => {
         setIsPlaying(false)
-        let tempList = points
-        tempList.push(point)
-        tempList.sort(function(a, b){return b-a})
-        if(tempList.length > 10) tempList.length = 10;
-        setPoints(tempList)
-        console.log(points)
+        updateLeaderboard()
         setPoint(0)
     }
 
