@@ -23,9 +23,9 @@ function App() {
       <ul>
         <li><Link to='/'>Home</Link></li>
         {user?
-          <li><Link to='/Login'>Login</Link></li>
-          :
           <li><Link to="/Logout">Logout</Link></li>
+          :
+          <li><Link to='/Login'>Login</Link></li>
         }
         
       </ul>
