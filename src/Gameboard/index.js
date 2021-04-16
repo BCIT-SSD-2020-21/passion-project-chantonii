@@ -125,16 +125,6 @@ export default function Gameboard(props){
         }
     }
 
-    useEffect(() => {
-        var moveId
-        if(isPlaying){
-            moveId = setInterval(()=> {ghostMovement()},1000)
-        }else{
-            clearInterval(moveId)
-        }
-        return () =>  clearInterval(moveId)
-    }, [isPlaying,pinky,blinky,inky,clyde,point])
-
     const ghostMovement = () => {
         setPoint(prev => prev + 10)
         var pinkyMove = Math.round(Math.random() * 3)
@@ -145,8 +135,8 @@ export default function Gameboard(props){
                 setPinky({...pinky, xpos: pinky.xpos + 25})
             }
         }else if (pinkyMove === 1) { //up
-            if(pinky.ypos === 0){
-                setPinky({...pinky,ypos: 575})
+            if(pinky.ypos === -25){
+                setPinky({...pinky,ypos: 550})
             }else{
                 setPinky({...pinky, ypos: pinky.ypos - 25})
             }
@@ -157,8 +147,8 @@ export default function Gameboard(props){
                 setPinky({...pinky, xpos: pinky.xpos - 25})
             }
         }else { //down
-            if(pinky.ypos === 575){
-                setPinky({...pinky,ypos: 0})
+            if(pinky.ypos === 550){
+                setPinky({...pinky,ypos: -25})
             }else{
                 setPinky({...pinky, ypos: pinky.ypos + 25})
             }
@@ -172,8 +162,8 @@ export default function Gameboard(props){
                 setBlinky({...blinky, xpos: blinky.xpos + 25})
             }
         }else if (blinkyMove === 1) { //up
-            if(blinky.ypos === 0){
-                setBlinky({...blinky,ypos: 575})
+            if(blinky.ypos === -50){
+                setBlinky({...blinky,ypos: 525})
             }else{
                 setBlinky({...blinky, ypos: blinky.ypos - 25})
             }
@@ -184,8 +174,8 @@ export default function Gameboard(props){
                 setBlinky({...blinky, xpos: blinky.xpos - 25})
             }
         }else { //down
-            if(blinky.ypos === 575){
-                setBlinky({...blinky,ypos: 0})
+            if(blinky.ypos === 525){
+                setBlinky({...blinky,ypos: -50})
             }else{
                 setBlinky({...blinky, ypos: blinky.ypos + 25})
             }
@@ -199,8 +189,8 @@ export default function Gameboard(props){
                 setInky({...inky, xpos: inky.xpos + 25})
             }
         }else if (inkyMove === 1) { //up
-            if(inky.ypos === 0){
-                setInky({...inky,ypos: 575})
+            if(inky.ypos === -75){
+                setInky({...inky,ypos: 500})
             }else{
                 setInky({...inky, ypos: inky.ypos - 25})
             }
@@ -211,8 +201,8 @@ export default function Gameboard(props){
                 setInky({...inky, xpos: inky.xpos - 25})
             }
         }else { //down
-            if(inky.ypos === 575){
-                setInky({...inky,ypos: 0})
+            if(inky.ypos === 500){
+                setInky({...inky,ypos: -75})
             }else{
                 setInky({...inky, ypos: inky.ypos + 25})
             }
@@ -226,8 +216,8 @@ export default function Gameboard(props){
                 setClyde({...clyde, xpos: clyde.xpos + 25})
             }
         }else if (clydeMove === 1) { //up
-            if(clyde.ypos === 0){
-                setClyde({...clyde,ypos: 575})
+            if(clyde.ypos === -100){
+                setClyde({...clyde,ypos: 475})
             }else{
                 setClyde({...clyde, ypos: clyde.ypos - 25})
             }
@@ -238,16 +228,25 @@ export default function Gameboard(props){
                 setClyde({...clyde, xpos: clyde.xpos - 25})
             }
         }else { //down
-            if(clyde.ypos === 575){
-                setClyde({...clyde,ypos: 0})
+            if(clyde.ypos === 475){
+                setClyde({...clyde,ypos: -100})
             }else{
                 setClyde({...clyde, ypos: clyde.ypos + 25})
             }
         }
     }
-    
+
+    useEffect(() => {
+        var moveId
+        if(isPlaying){
+            moveId = setInterval(()=> {ghostMovement()},1000)
+        }else{
+            clearInterval(moveId)
+        }
+        return () =>  clearInterval(moveId)
+    }, [isPlaying,pinky,blinky,inky,clyde,point])
+
     return(
-        
         <div>
             {username ?
                 <p>Welcome {name}</p> : <p>Welcome Player 1</p>    
@@ -271,8 +270,6 @@ export default function Gameboard(props){
                 </div> :
                 <Leaderboard points={points}/>
             }
-            
-            
         </div>
     );
 }
