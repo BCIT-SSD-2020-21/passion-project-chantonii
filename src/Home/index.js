@@ -1,5 +1,5 @@
 import Gameboard from '../Gameboard'
-import '../App.css';
+import './home.css';
 
 export default function Home(props){
     if(props){
@@ -8,10 +8,9 @@ export default function Home(props){
     return(
         <div className="App">
             <h1>Pacman Clone</h1>
-            {user?
+            {user ?
                 <Gameboard username={user.email}/>  : <Gameboard />
             }
-            
         </div>        
     )
 

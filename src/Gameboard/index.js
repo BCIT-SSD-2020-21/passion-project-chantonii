@@ -2,6 +2,7 @@ import {useState,useEffect} from 'react'
 import Leaderboard from '../Leaderboard'
 import firebase from '../firebase/config.js'
 import 'firebase/firestore'
+import './gameboard.css'
 
 export default function Gameboard(props){
     var name
@@ -12,7 +13,6 @@ export default function Gameboard(props){
             var username = splitname[0]
             name = username
         }
-        
     }
     
     const db = firebase.firestore()
