@@ -7,10 +7,9 @@ export default function Gameboard(props){
     var name = "ANT"
     if(props){
         var username = props.username
-        var name = username
+        name = username
     }
     
-
     const db = firebase.firestore()
 
     const [isPlaying, setIsPlaying] = useState(false)
