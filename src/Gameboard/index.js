@@ -2,12 +2,17 @@ import {useState,useEffect} from 'react'
 import Leaderboard from '../Leaderboard'
 import firebase from '../firebase/config.js'
 import 'firebase/firestore'
+import './gameboard.css'
 
 export default function Gameboard(props){
-    var name = "ANT"
+    var name
     if(props){
-        var username = props.username
-        name = username
+        var tempname = props.username
+        if(tempname){
+            var splitname = tempname.split("@")
+            var username = splitname[0]
+            name = username
+        }
     }
     
     const db = firebase.firestore()
@@ -62,7 +67,10 @@ export default function Gameboard(props){
     
     
     const updateLeaderboard = async () => {
-        
+        if(!name){
+            name = "ANT"
+        }
+
         await db
             .collection('leaderboard')
             .add({
@@ -241,13 +249,14 @@ export default function Gameboard(props){
     return(
         
         <div>
+            {username ?
+                <p>Welcome {name}</p> : <p>Welcome Player 1</p>    
+            }
             <div>
                 <button onClick={gameOn}> start game </button>
                 <button onClick={gameOver}> end game</button>
             </div>
-            {username ?
-                <p>Welcome {username}</p> : <p>Welcome</p>    
-            }
+            
             {isPlaying ?
                 <p>Enjoy the game!</p> : <p>Press start to begin</p>
             }

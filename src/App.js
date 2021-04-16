@@ -28,17 +28,15 @@ function App() {
   
   return (
   <Router>
-    <div>
-      <ul>
-        <li><Link to='/'>Home</Link></li>
+      <ul className="nav">
+        <button><Link to='/'>Home</Link></button>
         {user?
           <button onClick={handleLogout}>Logout</button>
           :
-          <li><Link to='/Login'>Login</Link></li>
+          <button><Link to='/Login'>Login</Link></button>
         }
         
       </ul>
-    </div>
     <Switch>    
       <Route exact path="/"> <Home user={user}/> </Route>
       <Route exact path="/register"> <Registration/> </Route>
