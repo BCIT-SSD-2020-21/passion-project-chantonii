@@ -12,10 +12,19 @@ function App() {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           setUser(user)
+          console.log(user.email)
         } else {
           console.log("no user")
         }
       });
+
+  const handleLogout = () =>{
+    firebase.auth().signOut()
+    .catch((error) => {
+        alert(error)
+    });
+    window.location.reload()
+  }
   
   return (
   <Router>
@@ -23,7 +32,7 @@ function App() {
       <ul>
         <li><Link to='/'>Home</Link></li>
         {user?
-          <li><Link to="/Logout">Logout</Link></li>
+          <button onClick={handleLogout}>Logout</button>
           :
           <li><Link to='/Login'>Login</Link></li>
         }
@@ -31,7 +40,7 @@ function App() {
       </ul>
     </div>
     <Switch>    
-      <Route exact path="/"> <Home/> </Route>
+      <Route exact path="/"> <Home user={user}/> </Route>
       <Route exact path="/register"> <Registration/> </Route>
       <Route exact path="/login"> <Login/> </Route>
       <Route exact path="/logout"></Route>
