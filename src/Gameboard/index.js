@@ -4,8 +4,10 @@ import firebase from '../firebase/config.js'
 import 'firebase/firestore'
 
 export default function Gameboard(props){
+    var name = "ANT"
     if(props){
         var username = props.username
+        var name = username
     }
     
 
@@ -59,8 +61,9 @@ export default function Gameboard(props){
         document.getElementById("gamepad").focus();
     }
     
-    const name = "ANT"
+    
     const updateLeaderboard = async () => {
+        
         await db
             .collection('leaderboard')
             .add({
