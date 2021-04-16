@@ -4,6 +4,10 @@ import firebase from '../firebase/config.js'
 import 'firebase/firestore'
 
 export default function Gameboard(props){
+    if(props){
+        var username = props.username
+    }
+    
 
     const db = firebase.firestore()
 
@@ -239,6 +243,9 @@ export default function Gameboard(props){
                 <button onClick={gameOn}> start game </button>
                 <button onClick={gameOver}> end game</button>
             </div>
+            {username ?
+                <p>Welcome {username}</p> : <p>Welcome</p>    
+            }
             {isPlaying ?
                 <p>Enjoy the game!</p> : <p>Press start to begin</p>
             }
